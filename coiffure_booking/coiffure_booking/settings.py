@@ -1,14 +1,16 @@
 from pathlib import Path
 
-# --- BASE ---
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# --- SECURITY ---
+# Quick-start development settings - unsuitable for production
 SECRET_KEY = 'django-insecure-^=6-_k)oh!n9-fpcd1qd0rf(!8y2!!8cc*so1if(!*ydv@*_dc'
 DEBUG = False
+
+# Autoriser ton domaine Render et localhost pour tests
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'coiffure-booking.onrender.com']
 
-# --- APPLICATIONS ---
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -16,12 +18,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bookings',  # ton app de réservation
+    'bookings',
 ]
 
-# --- MIDDLEWARE ---
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # <-- ajouter WhiteNoise ici
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -32,11 +34,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'coiffure_booking.urls'
 
-# --- TEMPLATES ---
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # si tu as un dossier templates global
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -51,7 +52,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'coiffure_booking.wsgi.application'
 
-# --- DATABASE ---
+# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -59,7 +60,7 @@ DATABASES = {
     }
 }
 
-# --- PASSWORD VALIDATION ---
+# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -67,28 +68,21 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# --- INTERNATIONALIZATION ---
+# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# --- STATIC FILES (CSS/JS) ---
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Collectstatic va tout mettre ici
-STATICFILES_DIRS = [
-    BASE_DIR / 'coiffure_booking' / 'static',  # tes fichiers CSS/JS dans app
-]
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # dossier collectstatic
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# --- MEDIA (si tu veux gérer des uploads) ---
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-# --- DEFAULT PRIMARY KEY ---
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# --- CSRF pour Render ---
+# CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
     'https://coiffure-booking.onrender.com',
 ]
 
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
