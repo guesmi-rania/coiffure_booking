@@ -1,9 +1,31 @@
-<h1>Liste des Réservations</h1>
-<a href="{% url 'booking_create' %}">Nouvelle réservation</a>
-<ul>
-  {% for booking in bookings %}
-    <li>{{ booking.name }} - {{ booking.service }} - {{ booking.date }} {{ booking.time }}</li>
-  {% empty %}
-    <li>Aucune réservation</li>
-  {% endfor %}
-</ul>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Réservations</title>
+    <link rel="stylesheet" href="{% static 'bookings/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Liste des Réservations</h1>
+
+        <div class="links">
+            <a href="{% url 'booking_create' %}">+ Nouvelle réservation</a>
+        </div>
+
+        <ul class="booking-list">
+            {% for booking in bookings %}
+                <li>
+                    <strong>{{ booking.name }}</strong> - 
+                    {{ booking.service }} - 
+                    {{ booking.date }} {{ booking.time }}
+                </li>
+            {% empty %}
+                <li>Aucune réservation</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

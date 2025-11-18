@@ -101,3 +101,9 @@ ALLOWED_HOSTS = [
     'localhost',
     '9000-firebase-coiffurebooking-1763369537811.cluster-ikslh4rdsnbqsvu5nw3v4dqjj2.cloudworkstations.dev'
 ]
+
+# settings.py
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-firebase-coiffurebooking-1763369537811.cluster-ikslh4rdsnbqsvu5nw3v4dqjj2.cloudworkstations.dev',
+]

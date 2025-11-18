@@ -1,7 +1,25 @@
-<h1>Nouvelle réservation</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Réserver</button>
-</form>
-<a href="{% url 'booking_list' %}">Retour à la liste</a>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Nouvelle Réservation</title>
+    <link rel="stylesheet" href="{% static 'bookings/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Nouvelle Réservation</h1>
+
+        <form method="post" class="booking-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Réserver</button>
+        </form>
+
+        <div class="links">
+            <a href="{% url 'booking_list' %}">← Retour à la liste des réservations</a>
+        </div>
+    </div>
+</body>
+</html>
