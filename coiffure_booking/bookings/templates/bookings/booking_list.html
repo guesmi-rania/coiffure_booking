@@ -1,0 +1,9 @@
+<h1>Liste des Réservations</h1>
+<a href="{% url 'booking_create' %}">Nouvelle réservation</a>
+<ul>
+  {% for booking in bookings %}
+    <li>{{ booking.name }} - {{ booking.service }} - {{ booking.date }} {{ booking.time }}</li>
+  {% empty %}
+    <li>Aucune réservation</li>
+  {% endfor %}
+</ul>
